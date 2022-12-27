@@ -22,7 +22,7 @@ PID="$!"
 disown &> /dev/null
 sleep 1
 
-if ! curl --fail -X 'POST' http://127.0.0.1:8080 -d "$ALERT_EXAMPLE"; then
+if ! curl --silent --fail -X 'POST' http://127.0.0.1:8080 -d "$ALERT_EXAMPLE"; then
   echo "Couldn't post alerts to executor" >&2
   exit 1
 fi
