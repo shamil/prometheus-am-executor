@@ -1,34 +1,30 @@
-[![CircleCI](https://circleci.com/gh/imgix/prometheus-am-executor.svg?style=svg)](https://circleci.com/gh/imgix/prometheus-am-executor)
 
 # prometheus-am-executor
 
-The prometheus-am-executor is a HTTP server that receives alerts from the
-[Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and
-executes a given command with alert details set as environment variables.
+`prometheus-am-executor` is a HTTP server that receives alerts from the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and executes a given command with alert details set as environment variables.
 
 ## Building
 
-##### Requirements
+### Requirements
 
-* [Git](https://git-scm.com/downloads)
-* [Go](https://golang.org/doc/install)
+- [Git](https://git-scm.com/downloads)
+- [Go](https://golang.org/doc/install)
 
+### 1. Clone this repository
 
-#### 1. Clone this repository
-
-```
+```shell
 git clone https://github.com/imgix/prometheus-am-executor.git
 ```
 
-#### 2. Compile the `prometheus-am-executor` binary
+### 2. Compile the `prometheus-am-executor` binary
 
-```
-go build
+```shell
+make build
 ```
 
 ## Usage
 
-```
+```shell
 Usage: ./prometheus-am-executor [options] script [args..]
 
   -l string
@@ -42,7 +38,7 @@ set:
 - `AMX_RECEIVER`: name of receiver in the AM triggering the alert
 - `AMX_STATUS`: alert status
 - `AMX_EXTERNAL_URL`: URL to reach alertmanager
-- `AMX_ALERT_LEN`: Number of alerts; for iterating through `AMX_ALERT_<n>..` vars
+- `AMX_ALERT_LEN`: Number of alerts; for iterating through `AMX_ALERT_<n>...` vars
 - `AMX_LABEL_<label>`: alert label pairs
 - `AMX_GLABEL_<label>`: label pairs used to group alert
 - `AMX_ANNOTATION_<key>`: alert annotation key/value pairs
@@ -50,8 +46,8 @@ set:
 - `AMX_ALERT_<n>_START`: start of alert in seconds since epoch
 - `AMX_ALERT_<n>_END`: end of alert, 0 for firing alerts
 - `AMX_ALERT_<n>_URL`: URL to metric in prometheus
-- `AMX_ALERT_<n>_LABEL_<label>`: <value> alert label pairs
-- `AMX_ALERT_<n>_ANNOTATION_<key>`: <value> alert annotation key/value pairs
+- `AMX_ALERT_<n>_LABEL_<label>`: `<value>` alert label pairs
+- `AMX_ALERT_<n>_ANNOTATION_<key>`: `<value>` alert annotation key/value pairs
 
 ## Example: Reboot systems with errors
 
@@ -65,22 +61,26 @@ if increased by 1. To make sure enough instances are in service all the time,
 the reboot should only get triggered if at least 80% of all instances are
 reachable in the load balancer. A alerting expression would look like this:
 
-```
-ALERT RebootMachine IF
-	increase(app_errors_unrecoverable_total[15m]) > 0 AND
-	avg by(backend) (haproxy_server_up{backend="app"}) > 0.8
+```yaml
+groups:
+- name: executors.rules
+  rules:
+  - alert: RebootMachine
+    expr: >
+      IF increase(app_errors_unrecoverable_total[15m]) > 0
+      AND avg by(backend) (haproxy_server_up{backend="app"}) > 0.8
 ```
 
 This will trigger an alert `RebootMachine` if `app_errors_unrecoverable_total`
 increased in the last 15 minutes and there are at least 80% of all servers for
 backend `app` up.
 
-Now the alert needs to get routed to prometheus-am-executor like in this 
+Now the alert needs to get routed to prometheus-am-executor like in this
 [alertmanager config](examples/alertmanager.conf) example.
 
 Finally prometheus-am-executor needs to be pointed to a reboot script:
 
-```
+```shell
 ./prometheus-am-executor examples/reboot
 ```
 
@@ -88,9 +88,9 @@ As soon as the counter increases by 1, an alert gets triggered and the
 alertmanager routes the alert to prometheus-am-executor which executes the
 reboot script.
 
-### Caveats
+## Caveats
 
-To make sure a system doesn't get rebooted multiple times, the 
+To make sure a system doesn't get rebooted multiple times, the
 `repeat_interval` needs to be longer than interval used for `increase()`. As
 long as that's the case, prometheus-am-executor will run the provided script
 only once.
