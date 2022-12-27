@@ -1,25 +1,21 @@
-ifndef TMPDIR
 export TMPDIR := /tmp
-endif
-
-.PHONY = test deps env build all
-
 export GOPATH := $(TMPDIR)/prometheus-am-executor-go
-export GOBIN := $(GOPATH)/bin
+export GOBIN  := $(GOPATH)/bin
 
-env:
-	mkdir -p $(GOBIN)
-	go get github.com/juju/testing/checkers
+.PHONY = test deps build all
 
-deps: env
-	go env GOPATH
-	go get
+deps:
+	@echo "==> Upgrading dependencies..."
+	@go get -t -u ./...
+	@go mod tidy
 
 build: deps
-	go build -o $(GOBIN)/prometheus-am-executor
+	@echo "==> Building ..."
+	@go build -o $(GOBIN)/prometheus-am-executor
 
 test: build
-	go test
-	./scripts/integration
+	@echo "==> Running tests ..."
+	@go test
+	@scripts/integration
 
 all: test build

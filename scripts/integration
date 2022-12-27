@@ -3,10 +3,11 @@
 set -euo pipefail
 
 cleanup() {
-    if [ -n "$PID" ] ; then
+    if [ -n "$PID" ]; then
         kill "$PID" &> /dev/null
     fi
-    if [ -n "$TMPFILE" ] && [ -e "$TMPFILE" ] ; then
+
+    if [[ -n "$TMPFILE" && -e "$TMPFILE" ]]; then
         rm "$TMPFILE" &> /dev/null
     fi
 }
@@ -39,4 +40,4 @@ if ! grep -q "AMX_ALERT_2_LABEL_instance=localhost:5678" "$TMPFILE"; then
   exit 1
 fi
 
-echo "OK"
+echo -e "ok\t$0"
