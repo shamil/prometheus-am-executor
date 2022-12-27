@@ -88,7 +88,7 @@ As soon as the counter increases by 1, an alert gets triggered and the
 alertmanager routes the alert to prometheus-am-executor which executes the
 reboot script.
 
-## Caveats
+### Caveats
 
 To make sure a system doesn't get rebooted multiple times, the
 `repeat_interval` needs to be longer than interval used for `increase()`. As
