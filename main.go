@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -69,7 +69,7 @@ func (c *config) handleWebhook(w http.ResponseWriter, req *http.Request) {
 	if c.verbose {
 		log.Println("Webhook triggered")
 	}
-	data, err := ioutil.ReadAll(req.Body)
+	data, err := io.ReadAll(req.Body)
 	if err != nil {
 		handleError(w, err)
 		c.errCounter.WithLabelValues("read").Inc()

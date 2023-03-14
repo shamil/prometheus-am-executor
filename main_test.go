@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"net/http/httptest"
@@ -216,7 +216,7 @@ func TestHandleHealth(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Errorf("Wrong response from handleHealth; got %d, want %d", resp.StatusCode, 200)
 	}
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		t.Errorf("Failed to read response from handleHealth: %v", err)
 	}

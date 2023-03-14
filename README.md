@@ -1,7 +1,7 @@
 
 # prometheus-am-executor
 
-`prometheus-am-executor` is am HTTP server that receives alerts from the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and executes a given command with alert details set as environment variables.
+`prometheus-am-executor` is an HTTP server that receives alerts from the [Prometheus Alertmanager](https://prometheus.io/docs/alerting/alertmanager/) and executes a given command with alert details set as environment variables.
 
 ## Building
 
