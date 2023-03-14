@@ -4,10 +4,14 @@ export GOBIN  := $(GOPATH)/bin
 
 .PHONY = test deps build all
 
-deps:
+upgrade-deps:
 	@echo "==> Upgrading dependencies..."
 	@go get -t -u ./...
 	@go mod tidy
+
+deps:
+	@echo "==> Installing dependencies..."
+	@go mod download
 
 build: deps
 	@echo "==> Building ..."
