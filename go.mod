@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/juju/testing v1.1.0
-	github.com/prometheus/alertmanager v0.25.1
+	github.com/prometheus/alertmanager v0.26.0
 	github.com/prometheus/client_golang v1.18.0
 	github.com/prometheus/client_model v0.5.0
 )
