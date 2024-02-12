@@ -3,7 +3,7 @@ module github.com/shamil/prometheus-am-executor
 go 1.20
 
 require (
-	github.com/juju/testing v1.1.0
+	github.com/juju/testing v1.2.0
 	github.com/prometheus/alertmanager v0.26.0
 	github.com/prometheus/client_golang v1.18.0
 	github.com/prometheus/client_model v0.5.0
@@ -12,7 +12,7 @@ require (
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
-	github.com/juju/loggo v1.0.0 // indirect
+	github.com/juju/loggo/v2 v2.0.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
