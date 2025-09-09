@@ -1,8 +1,6 @@
 module github.com/shamil/prometheus-am-executor
 
-go 1.23.0
-
-toolchain go1.24.1
+go 1.25
 
 require (
 	github.com/juju/testing v1.2.0
