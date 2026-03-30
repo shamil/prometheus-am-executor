@@ -3,7 +3,7 @@ module github.com/shamil/prometheus-am-executor
 go 1.25
 
 require (
-	github.com/juju/testing v1.2.0
+	github.com/juju/testing v1.2.1
 	github.com/prometheus/alertmanager v0.31.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/prometheus/client_model v0.6.2
