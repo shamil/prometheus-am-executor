@@ -1,10 +1,10 @@
 module github.com/shamil/prometheus-am-executor
 
-go 1.25
+go 1.25.0
 
 require (
 	github.com/juju/testing v1.2.1
-	github.com/prometheus/alertmanager v0.31.1
+	github.com/prometheus/alertmanager v0.32.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/prometheus/client_model v0.6.2
 )
@@ -19,11 +19,9 @@ require (
 	github.com/prometheus/common v0.67.5 // indirect
 	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
-	github.com/shurcooL/httpfs v0.0.0-20230704072500-f1e31cf0ba5c // indirect
-	github.com/shurcooL/vfsgen v0.0.0-20230704071429-0000e147ea92 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/text v0.35.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
